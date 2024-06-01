@@ -1,0 +1,8 @@
+SELECT  vd.id_vendedor,
+        vd.nome,
+	sum(ip.preco_praticado*ip.quantidade) as faturamento
+FROM vendedores as vd
+INNER JOIN clientes cli ON cli.id_vendedor = vd.id_vendedor
+INNER JOIN pedido pd ON pd.id_cliente = cli.id_cliente
+INNER JOIN itens_pedido ip ON ip.id_pedido = pd.id_pedido
+GROUP BY vd.id_vendedor

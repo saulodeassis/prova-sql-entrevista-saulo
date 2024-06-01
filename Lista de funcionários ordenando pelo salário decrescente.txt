@@ -1,0 +1,4 @@
+SELECT v.nome,
+       v.salario 
+FROM vendedores as v 
+ORDER BY v.salario DESC

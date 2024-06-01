@@ -1,0 +1,6 @@
+SELECT cli.id_cliente, 
+       cli.razao_social, 
+			 pd.valor_total as faturamento
+FROM clientes as cli 
+LEFT JOIN pedido as pd on pd.id_cliente = cli.id_cliente
+ORDER BY pd.valor_total ASC

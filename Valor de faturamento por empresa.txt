@@ -1,0 +1,7 @@
+SELECT emp.id_empresa,
+       emp.razao_social, 
+       CASE
+	WHEN (SELECT sum(valor_total) FROM pedido as pd WHERE pd.id_empresa = emp.id_empresa) > 0 
+	THEN  (SELECT sum(valor_total) FROM pedido as pd WHERE pd.id_empresa = emp.id_empresa) ELSE 0 END as faturamento	 
+FROM empresa as emp 
+GROUP BY emp.id_empresa,emp.razao_social,faturamento 

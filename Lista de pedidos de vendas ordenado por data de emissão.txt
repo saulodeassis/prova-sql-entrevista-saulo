@@ -1,0 +1,1 @@
+SELECT * FROM pedido as pd ORDER BY pd.data_emissao ASC

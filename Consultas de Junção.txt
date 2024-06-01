@@ -1,0 +1,26 @@
+SELECT ip.id_produto,
+       pro.descricao,
+			 pd.id_cliente,
+			 emp.id_empresa,
+			 emp.razao_social,
+			 vd.id_vendedor,
+			 vd.nome,
+			 conf.preco_minimo,
+			 conf.preco_maximo,
+			 ip.quantidade,
+			 MAX(ip.preco_praticado*ip.quantidade) as preco_base				 
+FROM clientes as cli 
+LEFT JOIN pedido as pd 
+ON pd.id_cliente = cli.id_cliente
+LEFT JOIN itens_pedido ip 
+ON ip.id_pedido = pd.id_pedido
+LEFT JOIN produtos pro 
+ON pro.id_produto = ip.id_produto
+LEFT JOIN empresa as emp 
+ON emp.id_empresa = pd.id_empresa
+LEFT JOIN vendedores as vd 
+ON vd.id_vendedor  = cli.id_vendedor
+LEFT JOIN config_preco_produto as conf 
+ON conf.id_produto = ip.id_produto
+
+GROUP BY ip.id_produto, pro.descricao, pd.id_cliente, emp.id_empresa, vd.id_vendedor, conf.preco_minimo, conf.preco_maximo,ip.quantidade
